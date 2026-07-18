@@ -8,7 +8,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-12-ff2d20.svg)](backend/composer.json)
 [![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ed.svg)](docker-compose.yml)
 
-**开源免费 · Docker 一键部署 · 可离线体验 · 回答自带引用 · 资料存储自己掌控**
+**开源免费 · Docker 一键部署 · 支持离线运行 · 回答自带引用 · 资料存储自己掌控**
 
 [快速开始](#五分钟启动) · [三分钟体验](#三分钟体验) · [查看功能](#核心功能) · [安装说明](docs/INSTALL.md) · [配置说明](docs/CONFIGURATION.md)
 
@@ -38,7 +38,7 @@ flowchart LR
     F --> G["反馈、质检与评测"]
 ```
 
-从资料进入系统，到回答可核验，再到质量可评测，免费版提供的是一套完整知识管理闭环，而不是只有演示效果的单页 RAG Demo。
+从资料整理、知识检索到引用核对和质量评测，形成一套可以持续使用和改进的知识管理流程。
 
 ## 核心功能
 
@@ -54,7 +54,7 @@ flowchart LR
 | 企业微信配置 | 管理群机器人 Webhook，服务端加密保存，并提供配置校验 |
 | 运行状态 | 查看知识文档、切片、分类、问答次数和系统健康情况 |
 
-## 六个实际优势
+## 为什么选择它
 
 ### 1. 回答有出处，员工敢用
 
@@ -155,7 +155,7 @@ MODEL_PROVIDER=local-extractive
 MODEL_CHAT_MODEL=local-grounded-v1
 ```
 
-不调用外部大模型，适合离线体验和功能验证。
+不调用外部大模型，适合无法访问外部模型服务的企业内网或离线环境。
 
 ### OpenAI 兼容模式
 
@@ -179,21 +179,6 @@ MODEL_CHAT_MODEL=provider-model-name
 - 企业微信 Webhook 在服务端加密保存，接口不返回明文。
 - 扫描版 PDF 需要先完成 OCR；免费版不包含 OCR 服务。
 - 安全问题请按照 [安全政策](SECURITY.md) 私密报告。
-
-<details>
-<summary><strong>查看免费版功能边界</strong></summary>
-
-免费版聚焦知识管理和内部知识问答，不包含以下模块：
-
-- AI 客服、微信客服、客户会话、自动回复和人工接管
-- CRM、销售线索和跟进记录
-- 内容生产、内容发布和情报中心
-- 智能体、工作流和 OpenClaw
-- 商业许可证、系统升级和商业运维模块
-
-这些模块在免费版的前后端路由和源码层均不存在，不是简单隐藏菜单。
-
-</details>
 
 ## 技术栈
 
