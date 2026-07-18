@@ -1,0 +1,39 @@
+name: Bug report
+description: 报告可复现的软件问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 请说明实际行为与预期行为。
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: 复现步骤
+      placeholder: "1. 启动...\n2. 上传...\n3. 提问..."
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本或提交
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 环境
+      description: 操作系统、Docker、PHP、Node 版本；请移除密钥和客户数据。
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 数据确认
+      options:
+        - label: 我确认内容中不包含密钥、个人信息或客户数据。
+          required: true

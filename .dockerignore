@@ -1,0 +1,11 @@
+.git
+.env
+.env.*
+!.env.example
+frontend/node_modules
+frontend/dist
+backend/vendor
+backend/storage/logs/*
+backend/database/*.sqlite
+output
+.playwright-cli

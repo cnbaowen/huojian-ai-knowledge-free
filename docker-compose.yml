@@ -1,0 +1,52 @@
+name: huojian-ai-knowledge-free
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    ports:
+      - "18080:80"
+    depends_on:
+      - backend
+    networks: [free_net]
+
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    env_file: ${FREE_ENV_FILE:-.env}
+    ports:
+      - "18000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - free_document_storage:/app/storage/app/private/documents
+    networks: [free_net]
+
+  mysql:
+    image: mysql:8.4
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-huojian_free}
+      MYSQL_USER: ${DB_USERNAME:-huojian_free}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-change-me-before-running}
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-change-root-before-running}
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    volumes:
+      - free_mysql_data:/var/lib/mysql
+    networks: [free_net]
+
+networks:
+  free_net:
+    name: huojian-ai-knowledge-free-net
+
+volumes:
+  free_mysql_data:
+    name: huojian-ai-knowledge-free-mysql
+  free_document_storage:
+    name: huojian-ai-knowledge-free-documents

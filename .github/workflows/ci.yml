@@ -1,0 +1,63 @@
+name: ci
+
+'on':
+  push:
+    branches: ['**']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  backend-and-acceptance:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, fileinfo
+          coverage: none
+          tools: composer:v2
+      - name: Validate and install PHP dependencies
+        run: |
+          composer --working-dir=backend validate --no-check-publish
+          composer --working-dir=backend install --no-interaction --prefer-dist
+          composer --working-dir=backend audit --locked --no-interaction
+      - name: PHP syntax
+        run: find backend -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Independent RAG acceptance
+        run: bash scripts/acceptance-linux.sh
+
+  frontend:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install, audit and build
+        run: |
+          npm --prefix frontend ci
+          npm --prefix frontend audit --omit=dev --audit-level=high
+          npm --prefix frontend run build
+
+  release-boundary:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - name: Free edition boundary scan
+        run: bash scripts/release-check.sh
