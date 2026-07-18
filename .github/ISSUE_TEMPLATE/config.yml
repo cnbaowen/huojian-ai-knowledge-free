@@ -1,5 +1,1 @@
 blank_issues_enabled: false
-contact_links:
-  - name: 安全漏洞
-    url: ../../security/advisories/new
-    about: 请使用 Private vulnerability reporting，不要公开提交漏洞。

@@ -2,8 +2,11 @@
 /.env.*
 !/.env.example
 /output/playwright/
+/output/release/
 /.playwright-cli/
 /backend/vendor/
+/backend/bootstrap/cache/*
+!/backend/bootstrap/cache/.gitkeep
 /frontend/node_modules/
 /frontend/dist/
 /backend/storage/*.key

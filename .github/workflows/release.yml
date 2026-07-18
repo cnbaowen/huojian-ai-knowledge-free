@@ -1,0 +1,61 @@
+name: release
+
+'on':
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-release:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, fileinfo
+          coverage: none
+          tools: composer:v2
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify release candidate
+        run: |
+          bash scripts/release-check.sh
+          composer --working-dir=backend validate --no-check-publish
+          composer --working-dir=backend install --no-interaction --prefer-dist
+          composer --working-dir=backend audit --locked --no-interaction
+          npm --prefix frontend ci
+          npm --prefix frontend audit --omit=dev --audit-level=high
+          npm --prefix frontend run build
+          bash scripts/acceptance-linux.sh
+      - name: Build source archive
+        run: bash scripts/build-release.sh "${GITHUB_REF_NAME}"
+      - name: Enforce stable-release owner gate
+        run: |
+          if [[ "${GITHUB_REF_NAME}" != *-* ]]; then
+            grep -Eq '"public_ready"[[:space:]]*:[[:space:]]*true' BUILD_PROVENANCE.json
+          fi
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          notes="docs/releases/${GITHUB_REF_NAME}.md"
+          test -f "$notes"
+          prerelease=''
+          if [[ "${GITHUB_REF_NAME}" == *-* ]]; then prerelease='--prerelease'; fi
+          gh release create "${GITHUB_REF_NAME}" \
+            "output/release/huojian-ai-knowledge-free-${GITHUB_REF_NAME}.zip" \
+            "output/release/SHA256SUMS.txt" \
+            --verify-tag \
+            $prerelease \
+            --title "火建AI知识管理免费版 ${GITHUB_REF_NAME}" \
+            --notes-file "$notes"

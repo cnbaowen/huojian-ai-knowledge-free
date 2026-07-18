@@ -1,0 +1,41 @@
+name: 使用问题
+description: 咨询安装、配置或内部知识问答的使用方式
+title: "[Question] "
+labels: [question]
+body:
+  - type: markdown
+    attributes:
+      value: 安全漏洞请按 SECURITY.md 私密报告，不要在 Issue 中公开密钥、客户数据或可利用细节。
+  - type: dropdown
+    id: area
+    attributes:
+      label: 问题范围
+      options:
+        - Docker 安装与升级
+        - 文档上传与解析
+        - 知识检索与内部问答
+        - 企业微信机器人
+        - 模型配置
+        - 其他免费版功能
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: 具体问题
+      description: 请说明已经尝试的操作和遇到的现象。
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: 版本或提交
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 数据确认
+      options:
+        - label: 我确认内容中不包含密钥、个人信息、Webhook 或客户数据。
+          required: true

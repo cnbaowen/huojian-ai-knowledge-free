@@ -8,6 +8,6 @@ class HealthController
 {
     public function __invoke(): JsonResponse
     {
-        return response()->json(['status' => 'ok', 'edition' => 'knowledge-community-free', 'stage' => 'phase-6-commercial-ui-original-migration']);
+        return response()->json(['status' => 'ok', 'edition' => 'knowledge-community-free', 'stage' => 'phase-7-github-publication-ready']);
     }
 }
