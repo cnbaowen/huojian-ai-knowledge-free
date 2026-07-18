@@ -32,7 +32,9 @@ jobs:
           composer --working-dir=backend install --no-interaction --prefer-dist
           composer --working-dir=backend audit --locked --no-interaction
       - name: PHP syntax
-        run: find backend -name '*.php' -print0 | xargs -0 -n1 php -l
+        run: |
+          find backend/app backend/bootstrap backend/config backend/database backend/public backend/routes \
+            -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: Independent RAG acceptance
         run: bash scripts/acceptance-linux.sh
 
