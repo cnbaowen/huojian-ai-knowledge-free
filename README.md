@@ -5,9 +5,7 @@
 [![Laravel](https://img.shields.io/badge/Laravel-12-ff2d20.svg)](backend/composer.json)
 [![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ed.svg)](docker-compose.yml)
 
-一套可独立部署的企业知识库系统，提供文档上传、解析切片、知识检索、内部问答、引用溯源、质量评测和企业微信群机器人配置。界面沿用火建AI商业版产品语言，但免费版代码、数据、容器和 Git 历史完全独立。
-
-> 当前发布候选：`v0.3.0-rc.2`。代码与技术材料已完成公开发布准备；正式公开前仍需仓库所有者确认品牌主体、安全联系方式和 GitHub 仓库地址。
+一套可独立部署的企业知识库系统，提供文档上传、解析切片、知识检索、内部问答、引用溯源、质量评测和企业微信群机器人配置。
 
 ![火建AI知识管理免费版工作台](docs/images/dashboard.png)
 
@@ -21,7 +19,7 @@
 | 质量治理 | 知识质检、异常提示、质量评分和 RAG 评测 |
 | 模型运行 | 默认本地引用式回答，可选 OpenAI 兼容接口 |
 | 企业微信 | 群机器人 Webhook 加密保存、校验和人工确认测试 |
-| 独立部署 | 独立 Compose 项目、数据库、文档卷和发布边界扫描 |
+| 独立部署 | 独立 Compose 项目、数据库和文档存储卷 |
 
 ## 五分钟启动
 
@@ -102,14 +100,12 @@ composer --working-dir=backend validate --no-check-publish
 npm --prefix frontend ci
 npm --prefix frontend run build
 bash scripts/acceptance-linux.sh
-bash scripts/release-check.sh
 ```
 
 Windows：
 
 ```powershell
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\acceptance.ps1
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\container-acceptance.ps1
 ```
 
 ## 文档
@@ -118,7 +114,6 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\container-acce
 - [配置说明](docs/CONFIGURATION.md)
 - [系统架构与免费版边界](docs/ARCHITECTURE.md)
 - [演示脚本](docs/DEMO.md)
-- [GitHub 发布操作手册](docs/GITHUB_PUBLISHING.md)
 - [贡献指南](CONTRIBUTING.md)
 - [安全政策](SECURITY.md)
 - [社区支持](SUPPORT.md)
@@ -127,5 +122,3 @@ powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\scripts\container-acce
 ## 许可证与品牌
 
 源代码采用 [Apache License 2.0](LICENSE)。`火建AI`、`Huojian AI` 名称和品牌标识不因代码许可证而授权，详见 [NOTICE](NOTICE)。
-
-本发布候选由仓库外独立构建器生成，没有携带商业版 Git 历史、客户数据、密钥、数据库、备份或运行日志。

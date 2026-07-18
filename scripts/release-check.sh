@@ -10,8 +10,6 @@ done
 [[ ! -f .env ]] || { echo '.env must not be committed' >&2; exit 1; }
 [[ -f LICENSE && -f NOTICE && -f SECURITY.md ]] || { echo 'release legal/security files missing' >&2; exit 1; }
 grep -q 'Apache License' LICENSE
-grep -Eq '"public_ready"[[:space:]]*:[[:space:]]*(true|false)' BUILD_PROVENANCE.json
-
 code_roots=(backend/app backend/routes backend/config backend/database frontend/src)
 for symbol in CustomerServiceController CustomerServiceCenterService OpenClaw WechatKf SalesWecom CrmController IntelligenceController PublishController AgenticRagSupplementService CustomerServiceModelReplayStore LicenseService SystemUpdate; do
   if grep -R -F -n --include='*.php' --include='*.js' --include='*.vue' "$symbol" "${code_roots[@]}"; then

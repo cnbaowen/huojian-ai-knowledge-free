@@ -20,5 +20,5 @@ body:
     attributes:
       label: 范围确认
       options:
-        - label: 该建议属于企业内部知识问答，不依赖商业版模块。
+        - label: 该建议属于本免费版知识管理与内部问答范围。
           required: true

@@ -1,9 +1,0 @@
-﻿{
-    "product":  "火建AI知识管理免费版",
-    "edition":  "knowledge-community-free",
-    "stage":  "phase-7-github-publication-ready",
-    "built_at":  "2026-07-18T18:08:28+08:00",
-    "builder_manifest_sha256":  "DE8F9D7682BE6738DF74E1ED38B883B02014F9E3908E4572608FE4D606EE868F",
-    "public_ready":  true,
-    "note":  "Phase 7 adds complete GitHub publication materials, release automation and owner confirmation gates. No commercial database, customer data, Git history, container or runtime was reused."
-}

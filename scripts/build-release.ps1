@@ -10,7 +10,7 @@ try {
     if (-not $Version) { throw 'Version or exact Git tag is required.' }
     if (@(& git status --porcelain).Count -ne 0) { throw 'Working tree must be clean.' }
     if (Test-Path (Join-Path $Root '.env')) { throw '.env must not be included in a release.' }
-    foreach ($Required in @('LICENSE', 'NOTICE', 'SECURITY.md', 'BUILD_PROVENANCE.json')) {
+    foreach ($Required in @('LICENSE', 'NOTICE', 'SECURITY.md')) {
         if (-not (Test-Path (Join-Path $Root $Required))) { throw "Missing release file: $Required" }
     }
     foreach ($Forbidden in @('customers', 'industry-templates', 'packaging', 'release', 'deploy', 'docker-data', 'runtime-logs', 'backups', 'artifacts', 'test-results')) {

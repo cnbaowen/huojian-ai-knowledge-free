@@ -1,7 +1,7 @@
 # 架构边界
 
 ```text
-商业版同款 Vue + Element Plus 产品界面
+Vue 3 + Element Plus 产品界面
   -> Laravel API / 令牌鉴权
      -> 知识分类、文档管理、原文下载与切片预览
      -> TXT / Markdown / CSV / JSON / DOCX / XLSX / PDF 文本提取

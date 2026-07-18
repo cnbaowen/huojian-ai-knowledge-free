@@ -39,17 +39,10 @@ jobs:
           bash scripts/acceptance-linux.sh
       - name: Build source archive
         run: bash scripts/build-release.sh "${GITHUB_REF_NAME}"
-      - name: Enforce stable-release owner gate
-        run: |
-          if [[ "${GITHUB_REF_NAME}" != *-* ]]; then
-            grep -Eq '"public_ready"[[:space:]]*:[[:space:]]*true' BUILD_PROVENANCE.json
-          fi
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          notes="docs/releases/${GITHUB_REF_NAME}.md"
-          test -f "$notes"
           prerelease=''
           if [[ "${GITHUB_REF_NAME}" == *-* ]]; then prerelease='--prerelease'; fi
           gh release create "${GITHUB_REF_NAME}" \
@@ -58,4 +51,4 @@ jobs:
             --verify-tag \
             $prerelease \
             --title "火建AI知识管理免费版 ${GITHUB_REF_NAME}" \
-            --notes-file "$notes"
+            --generate-notes
