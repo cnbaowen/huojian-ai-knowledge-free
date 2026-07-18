@@ -45,10 +45,13 @@ jobs:
         run: |
           prerelease=''
           if [[ "${GITHUB_REF_NAME}" == *-* ]]; then prerelease='--prerelease'; fi
+          notes_args=(--generate-notes)
+          notes_file="docs/releases/${GITHUB_REF_NAME}.md"
+          if [[ -f "$notes_file" ]]; then notes_args=(--notes-file "$notes_file"); fi
           gh release create "${GITHUB_REF_NAME}" \
             "output/release/huojian-ai-knowledge-free-${GITHUB_REF_NAME}.zip" \
             "output/release/SHA256SUMS.txt" \
             --verify-tag \
             $prerelease \
             --title "火建AI知识管理免费版 ${GITHUB_REF_NAME}" \
-            --generate-notes
+            "${notes_args[@]}"
