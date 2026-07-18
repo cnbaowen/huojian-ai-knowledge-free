@@ -2,7 +2,7 @@
 
 与火建AI商业版采用同一产品语言的企业知识管理免费版。它不是单页 RAG Demo，而是一套可独立部署的知识库系统：企业资料入库、分类治理、解析切片、质量检查、RAG 评测、内部知识问答、来源引用，以及企业微信群机器人配置。
 
-> 当前版本：`0.2.0-rc.1` / `phase-5-commercial-aligned-knowledge-free`。公开推送前仍需项目所有者确认许可证主体和品牌信息。
+> 当前版本：`0.3.0-rc.1` / `phase-6-commercial-ui-original-migration`。公开推送前仍需项目所有者确认许可证主体和品牌信息。
 
 ## 完整功能
 
@@ -18,11 +18,15 @@
 
 ## 产品截图
 
+![商业版同款工作台](docs/images/dashboard.png)
+
 ![内部知识问答](docs/images/knowledge-chat.png)
 
 ![企业知识库](docs/images/documents.png)
 
 ![企业微信机器人](docs/images/wecom-robot.png)
+
+![登录页面](docs/images/login.png)
 
 ## 五分钟启动
 
