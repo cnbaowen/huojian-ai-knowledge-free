@@ -1,5 +1,7 @@
 # 火建AI知识管理免费版
 
+[简体中文](README.md) | [English](README_EN.md)
+
 > 把散落在文件夹里的制度、手册、产品资料和技术文档，变成员工随时能问、答案有出处的企业知识库。
 
 [![CI](https://github.com/cnbaowen/huojian-ai-knowledge-free/actions/workflows/ci.yml/badge.svg)](https://github.com/cnbaowen/huojian-ai-knowledge-free/actions/workflows/ci.yml)
